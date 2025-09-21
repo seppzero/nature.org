@@ -27,21 +27,21 @@ workbox.core.clientsClaim();
  */
 self.__precacheManifest = [
   {
-    "url": "webpack-runtime-a14247bcae36925019f5.js"
+    "url": "webpack-runtime-2980f7367868c4cd8f04.js"
   },
   {
     "url": "framework-ff4bba73f091a41d7206.js"
   },
   {
-    "url": "app-c264b23eb143972657ba.js"
+    "url": "app-40a78a8d17edc57bc2fd.js"
   },
   {
     "url": "offline-plugin-app-shell-fallback/index.html",
-    "revision": "3a420b387121d56fab6dce6637074872"
+    "revision": "acc3e628fa4d2665f9a5cbdd5af8efe4"
   },
   {
     "url": "manifest.webmanifest",
-    "revision": "407d15562cc923abf42424927c0a61ff"
+    "revision": "64d2b793402d0e9e58354b0424c87f61"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
@@ -146,12 +146,12 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
   lastNavigationRequest = event.request.url
 
   let { pathname } = new URL(event.request.url)
-  pathname = pathname.replace(new RegExp(`^`), ``)
+  pathname = pathname.replace(new RegExp(`^/nature.org`), ``)
 
   // Check for resources + the app bundle
   // The latter may not exist if the SW is updating to a new version
   const resources = await idbKeyval.get(`resources:${pathname}`)
-  if (!resources || !(await caches.match(`/app-c264b23eb143972657ba.js`))) {
+  if (!resources || !(await caches.match(`/nature.org/app-40a78a8d17edc57bc2fd.js`))) {
     return await fetch(event.request)
   }
 
@@ -164,7 +164,7 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
     }
   }
 
-  const offlineShell = `/offline-plugin-app-shell-fallback/index.html`
+  const offlineShell = `/nature.org/offline-plugin-app-shell-fallback/index.html`
   const offlineShellWithKey = workbox.precaching.getCacheKeyForURL(offlineShell)
   return await caches.match(offlineShellWithKey)
 })
